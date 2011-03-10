@@ -1,0 +1,43 @@
+#define THRESHOLD 35
+#define SEEK_TIME 300
+#define T_SPEED 30
+
+long time;
+bool left = true;
+
+task main()
+{
+    SetSensorLight(IN_3);
+    OnFwdSync(OUT_BC, T_SPEED, 0);
+    while (true)
+    {
+        if (Sensor(IN_3) > THRESHOLD)
+        {
+            time = CurrentTick();
+            
+            if (left)
+            {
+                OnFwdSync(OUT_BC, T_SPEED, -100);
+                while ((Sensor(IN_3) > THRESHOLD) && ((CurrentTick() - time) < SEEK_TIME));
+                if (Sensor(IN_3) > THRESHOLD)
+                {
+                    OnFwdSync(OUT_BC, T_SPEED, 100);
+                    while (Sensor(IN_3) > THRESHOLD);
+                    left = false;
+                }
+            }
+            else
+            {
+                OnFwdSync(OUT_BC, T_SPEED, 100);
+                while ((Sensor(IN_3) > THRESHOLD) && ((CurrentTick() - time) < SEEK_TIME));
+                if (Sensor(IN_3) > THRESHOLD)
+                {
+                    OnFwdSync(OUT_BC, T_SPEED, -100);
+                    while (Sensor(IN_3) > THRESHOLD);
+                    left = true;
+                }
+            }
+            OnFwdSync(OUT_BC, T_SPEED, 0);
+        }
+    }
+}

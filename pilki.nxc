@@ -1,0 +1,225 @@
+#define INFINITE 80
+#define NEAR 14
+#define REALIGN 25
+
+
+bool ball1 = false;
+bool ball2 = false;
+
+bool isBlue = false;
+unsigned int ball = 0;
+unsigned int empty;
+int kicks = 0;
+
+
+void align ();
+void turnAround ();
+void align2 ();
+void turnAround2 ();
+void kick ();
+void find ();
+
+
+task main  ()
+{
+    SetSensorLight(IN_3, true);
+    SetSensorLowspeed(IN_4);
+    
+    Wait(500);
+    
+    /*
+    // kalibracja koloru
+    empty = Sensor(IN_3);
+    
+    // szukamy obiektu
+    find();
+
+    //probkowanie pilki
+    //if (abs(Sensor(IN_3) - empty) > 5 )
+    ball = Sensor(IN_3);
+
+    turnAround();
+
+    find();
+    
+    if (Sensor(IN_3) > ball) isBlue = true;
+    else isBlue = false;
+    
+    while (!ball1 || !ball2)
+    {
+        if (isBlue)
+        {
+            if (abs(Sensor(IN_3) - ball) < 10 && !ball1)
+            {
+                kick();
+                ball1 = true;
+            }
+            else if (!ball1)
+            {
+                kick();
+                ball2 = true;
+            }
+        }
+        else
+        {
+            if (abs(Sensor(IN_3) - ball) < 10 && ball1)
+            {
+                kick();
+                ball2 = true;
+            }
+            else if (!ball1)
+            {
+                kick();
+                ball1 = true;
+            }
+        }
+        
+        if ((ball1 && ball2) || kicks == 2) break;
+        turnAround();
+        find();
+    }
+    */
+    
+    find();
+    kick();
+    turnAround();
+    find();
+    kick();
+}
+
+
+void align ()
+{
+    do
+    {
+    
+    Off(OUT_BC);
+    long t0, t1;
+    
+    if (SensorUS(IN_4) < INFINITE)
+    {
+        OnFwdSync(OUT_BC, 30, -100);
+        while(SensorUS(IN_4) < INFINITE);
+        Off(OUT_BC);
+    }
+    else
+    {
+        OnFwdSync(OUT_BC, 30, 100);
+        while(SensorUS(IN_4) > INFINITE);
+        Off(OUT_BC);
+    }
+    //t0 = CurrentTick();
+    
+
+
+    OnFwdSync(OUT_BC, 30, 100);
+    Wait(500);
+    while(SensorUS(IN_4) < INFINITE);
+    Off(OUT_BC);
+    t0 = CurrentTick();
+    
+    OnFwdSync(OUT_BC, 30, -100);
+    Wait(500);
+    while(SensorUS(IN_4) < INFINITE);
+    Off(OUT_BC);
+    t1 = CurrentTick();
+    
+    
+    
+    
+    OnFwdSync(OUT_BC, 30, 100);
+    Wait(((t1 - t0) / 2) * 1);
+    Off(OUT_BC);
+    }
+    while (SensorUS(IN_4) > INFINITE);
+}
+
+void turnAround2 ()
+{
+    OnRevSync(OUT_BC, 30, 0);
+    Wait(2000);
+    OnFwdSync(OUT_BC, 30, -100);
+    while(SensorUS(IN_4) < INFINITE);
+    Wait(500);
+    Off(OUT_BC);
+}
+
+void align2 ()
+{
+     int len;
+     Off(OUT_BC);
+
+     do
+     {
+         if (SensorUS(IN_4) < INFINITE)
+         {
+             OnFwdSync(OUT_BC, 30, 100);
+             while(SensorUS(IN_4) < INFINITE);
+             Off(OUT_BC);
+         }
+         else
+         {
+            OnFwdSync(OUT_BC, 30, -100);
+            while(SensorUS(IN_4) > INFINITE);
+            Off(OUT_BC);
+         }
+    
+         len = 255;
+         OnFwdSync(OUT_BC, 30, -100);
+         while(SensorUS(IN_4) <= len) len = SensorUS(IN_4);
+
+         OnFwdSync(OUT_BC, 30, 100);
+         while(SensorUS(IN_4) != len);
+
+         Float(OUT_BC);
+    }
+    while(SensorUS(IN_4) > INFINITE)
+}
+
+void turnAround ()
+{
+    OnRevSync(OUT_BC, 30, 0);
+    Wait(2000);
+    OnFwdSync(OUT_BC, 30, 100);
+    while(SensorUS(IN_4) < INFINITE);
+    Wait(500);
+    Off(OUT_BC);
+}
+
+void kick ()
+{
+    RotateMotor(OUT_A, 30, 90);
+    RotateMotor(OUT_A, 30, -90);
+    kicks++;
+}
+
+void find ()
+{
+    while (SensorUS(IN_4) > NEAR)
+    {
+        if (SensorUS(IN_4) > INFINITE)
+        {
+            align();
+        }
+        else OnFwdSync(OUT_BC, 30, 0);
+    }
+    Off(OUT_BC);
+    
+    
+    /*
+    // szukamy obiektu
+    align();
+
+    // jedziemy w jego stronê
+    OnFwdSync(OUT_BC, 30, 0);
+
+    // gdy przekroczymy odelglosc posrednia
+    // robimy poprawke kursu
+    while (SensorUS(IN_4) > REALIGN);
+    align();
+    OnFwdSync(OUT_BC, 30, 0);
+
+    // jedziemy dalej az osiagniemy cel
+    while(SensorUS(IN_4) > NEAR);
+    */
+}
