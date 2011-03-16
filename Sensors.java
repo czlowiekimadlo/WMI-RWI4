@@ -10,31 +10,35 @@ import lejos.robotics.navigation.TachoPilot;
 public class Sensors
 {
 	TachoPilot pilot;
-	UltrasonicSensor sonic; 
+	UltrasonicSensor sonic;
+	LightSensor light;	
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {   
 		Sensors robot = new Sensors();
-		robot.sonic = new UltrasonicSensor(SensorPort.S4);
-		robot.pilot = new TachoPilot(1.75f, 12f, Motor.B, Motor.C);
+		robot.sonic = new UltrasonicSensor(SensorPort.S3);
+		robot.pilot = new TachoPilot(1.7f, 12f, Motor.B, Motor.C);
+		robot.light = new LightSensor(SensorPort.S4);
 		robot.run();
+		
     }
 	
-	public void run()
+	public void run() throws Exception
 	{
 		//pilot.travel(20);
 		
+		boolean more = true;
+		while (more) 
+		{
+			LCD.clear();
+			LCD.drawInt(sonic.getDistance(), 0, 0);
+			LCD.drawInt(light.readValue(), 4, 0, 1);
+			LCD.drawInt(light.readNormalizedValue(), 4, 0, 2);
+			LCD.drawInt(SensorPort.S4.readRawValue(), 4, 0, 3);
+			LCD.drawInt(SensorPort.S4.readValue(), 4, 0, 4);
+			more = Button.waitForPress()<8;
+		}
 		
-    while (!Button.ESCAPE.isPressed()) {
-
-      //LCD.clear();
-      //LCD.drawString(sonic.getVersion(), 0, 0);
-      //LCD.drawString(sonic.getProductID(), 0, 1);
-      //LCD.drawString(sonic.getSensorType(), 0, 2);
-      LCD.drawInt(sonic.getDistance(), 0, 3);
-	  }
-		
-		//kick();
 		
 	}
 	
