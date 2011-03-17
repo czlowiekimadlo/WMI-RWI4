@@ -16,9 +16,9 @@ public class Sensors
     public static void main(String[] args) throws Exception
     {   
 		Sensors robot = new Sensors();
-		robot.sonic = new UltrasonicSensor(SensorPort.S3);
+		robot.sonic = new UltrasonicSensor(SensorPort.S1);
 		robot.pilot = new TachoPilot(1.7f, 12f, Motor.B, Motor.C);
-		robot.light = new LightSensor(SensorPort.S4);
+		robot.light = new LightSensor(SensorPort.S2);
 		robot.run();
 		
     }
