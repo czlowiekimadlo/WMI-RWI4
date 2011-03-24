@@ -28,15 +28,15 @@ public class Sensors
 		//pilot.travel(20);
 		
 		boolean more = true;
-		while (more) 
+		while (!Button.ESCAPE.isPressed()) 
 		{
-			LCD.clear();
+			//LCD.clear();
 			LCD.drawInt(sonic.getDistance(), 0, 0);
 			LCD.drawInt(light.readValue(), 4, 0, 1);
 			LCD.drawInt(light.readNormalizedValue(), 4, 0, 2);
-			LCD.drawInt(SensorPort.S4.readRawValue(), 4, 0, 3);
-			LCD.drawInt(SensorPort.S4.readValue(), 4, 0, 4);
-			more = Button.waitForPress()<8;
+			LCD.drawInt(SensorPort.S2.readRawValue(), 4, 0, 3);
+			LCD.drawInt(SensorPort.S2.readValue(), 4, 0, 4);
+			//more = Button.waitForPress()<8;
 		}
 		
 		

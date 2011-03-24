@@ -1,5 +1,6 @@
 
 import lejos.nxt.*; // this is required for all programs that run on the NXT
+import lejos.robotics.navigation.TachoPilot;
 
 
 /**
@@ -8,15 +9,23 @@ import lejos.nxt.*; // this is required for all programs that run on the NXT
  */
 public class BasicMotorTest
 {
-    public static void main(String[] args)
+    TachoPilot pilot;
+	
+	
+	public static void main(String[] args)
     {
-
-        Motor.C.forward();
-		Motor.B.forward();
-        Button.waitForPress();
-        Motor.C.stop();
-		Motor.B.stop();
+		BasicMotorTest robot = new BasicMotorTest();
+		robot.pilot = new TachoPilot(1.7f, 12f, Motor.B, Motor.C);
+		robot.pilot.setSpeed(1000);
+		robot.run();
     }
+	
+	public void run ()
+	{
+		pilot.forward();
+		Button.waitForPress();
+		pilot.stop();
+	}
 }
 
 
