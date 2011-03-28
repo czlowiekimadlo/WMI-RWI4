@@ -5,3 +5,16 @@ Wydział Matematyki i Informatyki
 
 Name:
 Panzerbesatzung
+
+
+
+This repository contains all source files for robot
+constructed for PozRobot Student 2011 contest by
+RWI team no. 4 - Panzerbesatzung
+
+General configuration of robot is:
+B,C - main motors for movement
+A - manipulator servo
+
+Some of programs in repo are for testing purposes only
+and may often change due to sensor ports reconfiguration
