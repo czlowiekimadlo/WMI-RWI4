@@ -10,13 +10,13 @@ import lejos.robotics.navigation.TachoPilot;
 public class Bumper
 {
     TachoPilot pilot;
-	int armRealign = 160;
+	int armRealign = 120;
 	int armKick = 50;
 	
 	public static void main(String[] args) throws Exception
     {
 		Bumper robot = new Bumper();
-		robot.pilot = new TachoPilot(1.7f, 19f, Motor.B, Motor.C);
+		robot.pilot = new TachoPilot(6.8f, 22f, Motor.B, Motor.C);
 		robot.pilot.setSpeed(1000);
 		robot.run();
 		
@@ -27,24 +27,27 @@ public class Bumper
 	public void run () throws Exception
 	{
 		Motor.A.rotate(-armRealign, true);
+		
 		pilot.travel(100);
 		pilot.rotate(90);
 		pilot.travel(62);
 		pilot.rotate(90);
-		pilot.travel(95);
+		pilot.travel(105);
 		
-		pilot.setSpeed(100);
+		pilot.setSpeed(50);
 		
 		int i = 0;
 		do
 		{
 			Motor.A.rotate(-armKick, true);
-			Thread.sleep(300);
+			Thread.sleep(500);
+			Motor.A.stop();
 			Motor.A.rotate(armKick, true);
 			Thread.sleep(800);
-			pilot.travel(3);
+			pilot.travel(1, true);
+			Thread.sleep(6000);
 			i++;
-		} while (i < 10);
+		} while (i < 6);
 		
 		Motor.A.rotate(armRealign);
 	}
