@@ -23,6 +23,7 @@ public class BasicMotorTest
 	public void run ()
 	{
 		
+		//pilot.arc(35.5f);
 		pilot.forward();
 		Button.waitForPress();
 		pilot.stop();

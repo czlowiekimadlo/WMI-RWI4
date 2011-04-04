@@ -4,8 +4,8 @@ import lejos.robotics.navigation.TachoPilot;
 
 
 /**
- *Motor runs forward then backward as button is pressed.
- * @author Roger
+ *
+ * @author CzlowiekImadlo
  */
 public class Bumper
 {
