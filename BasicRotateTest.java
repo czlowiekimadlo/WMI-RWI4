@@ -15,7 +15,7 @@ public class BasicRotateTest
     {
 		BasicRotateTest robot = new BasicRotateTest();
 		robot.pilot = new TachoPilot(1.7f, 12f, Motor.B, Motor.C);
-		robot.pilot.setSpeed(50);
+		robot.pilot.setSpeed(100);
 		robot.run();
     }
 	

@@ -18,11 +18,16 @@ public class Marbles
 		robot.pilot.setSpeed(1000);
 		robot.run();
 		
-		Motor.A.regulateSpeed(false);
-		Motor.A.setPower(100);
     }
 	
-	public void run () throws Exception
+	public void run() throws Exception
+	{
+		int but = Button.waitForPress();
+		if (but == 2) run1();
+		else if (but == 4) run2();
+	}
+	
+	public void run1 () throws Exception
 	{
 	
 		pilot.rotate(60);
@@ -33,7 +38,25 @@ public class Marbles
 		pilot.travel(14);
 		pilot.rotate(-75);
 		pilot.travel(20);		
-		pilot.rotate(55);
+		pilot.rotate(30);
+		pilot.travel(10);
+			
+		
+	}
+	
+	
+	public void run2 () throws Exception
+	{
+	
+		pilot.rotate(-60);
+		pilot.travel(20);
+		pilot.rotate(75);
+		pilot.travel(23);
+		pilot.rotate(93);
+		pilot.travel(14);
+		pilot.rotate(75);
+		pilot.travel(20);		
+		pilot.rotate(-45);
 		pilot.travel(10);
 			
 		

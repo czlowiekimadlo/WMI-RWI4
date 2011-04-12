@@ -7,45 +7,40 @@ import lejos.robotics.navigation.TachoPilot;
  *Motor runs forward then backward as button is pressed.
  * @author Roger
  */
-public class BasicMotorTest
+public class Pass
 {
     TachoPilot pilot;
 	
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws Exception
     {
-		BasicMotorTest robot = new BasicMotorTest();
-		robot.pilot = new TachoPilot(3.8f, 12f, Motor.B, Motor.C);
+		Pass robot = new Pass();
+		robot.pilot = new TachoPilot(12.8f, 15.5f, Motor.B, Motor.C);
 		
 		Motor.B.smoothAcceleration(true);
 		Motor.B.regulateSpeed(false);
 		Motor.C.smoothAcceleration(true);
 		Motor.C.regulateSpeed(false);
 		
-		robot.pilot.setSpeed(600);
+		robot.pilot.setSpeed(800);
+		//robot.pilot.setRotateSpeed(1000);
 		robot.run();
     }
 	
-	public void run ()
+	public void run () throws Exception
 	{
+		pilot.rotate(70);
+		pilot.steer(-47);
+		Thread.sleep(2500);
+		pilot.stop();
 		
-		//pilot.arc(35.5f);
-		//pilot.forward();
-		//Button.waitForPress();
-		//pilot.stop();
-		
-		
-		pilot.travel(45, true);
+		/*
+		pilot.travel(90, true);
 		while (pilot.isMoving()) ;
 		pilot.stop();
 		pilot.travel(-10);
-		//Motor.A.rotate(-180);
-		/*
-		Motor.A.rotate(-130, true);
-		pilot.travel(100);
-		Motor.A.rotate(-60);
-		Motor.A.rotate(60);
 		*/
+		
 	}
 }
 
