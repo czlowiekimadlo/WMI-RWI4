@@ -53,19 +53,27 @@ public class Bumper
 		attack();
 
 		Motor.A.rotate(-armRealign, true);
-		while (Motor.A.isMoving());
+		Thread.sleep(500);
+		Motor.A.stop();
 	}
 	
 	public void attack() throws Exception
 	{
+		Motor.A.rotate(2 * armKick, true);
+		while (!touch.isPressed());
+		Motor.A.rotate(-armKick);
+		Motor.A.lock(1000);
+		
 		int i = 0;
 		do
 		{
-			Motor.A.rotate(3 * armKick, true);
+			Thread.sleep(6500);
+			
+			Motor.A.rotate(2 * armKick, true);
 			while (!touch.isPressed());
 			Motor.A.rotate(-armKick);
 			Motor.A.lock(1000);
-			Thread.sleep(6500);
+			
 			i++;
 		} while (i < 6);
 	}
