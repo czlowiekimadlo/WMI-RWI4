@@ -22,7 +22,7 @@ public class BasicMotorTest
 		Motor.C.smoothAcceleration(true);
 		Motor.C.regulateSpeed(false);
 		
-		robot.pilot.setSpeed(300);
+		robot.pilot.setSpeed(900);
 		robot.run();
     }
 	
@@ -35,9 +35,8 @@ public class BasicMotorTest
 		//pilot.stop();
 		
 		
-		pilot.travel(30, true);
-		while (pilot.isMoving()) ;
-		pilot.stop();
+		pilot.travel(60);
+		
 		//Motor.A.rotate(-180);
 		/*
 		Motor.A.rotate(-130, true);

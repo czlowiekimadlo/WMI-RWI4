@@ -100,7 +100,7 @@ public class Pass
 	public void steerTight(boolean reverse) throws Exception
 	{
 		int rotate = 70;
-		int steer = -46;
+		int steer = -55;
 		
 		if (reverse)
 		{
