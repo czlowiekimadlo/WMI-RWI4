@@ -3,8 +3,8 @@ import lejos.nxt.*; // this is required for all programs that run on the NXT
 import lejos.robotics.navigation.TachoPilot;
 
 /**
- *Motor runs forward then backward as button is pressed.
- * @author Roger
+ * Program for basic turning test.
+ * @author CzlowiekImadlo
  */
 public class BasicRotateTest
 {

@@ -26,12 +26,16 @@ public class Marbles
 		
     }
 	
+	/*
+		Yo dawg, we herd U liek running so we put a run
+		in your run so U can run while U run.
+	*/
 	public void run() throws Exception
 	{
 		
 		int but = Button.waitForPress();
 		if (but == 2) run1();
-		else if (but == 4) run1();
+		else if (but == 4) run2();
 		
 	}
 	

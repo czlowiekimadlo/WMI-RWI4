@@ -21,7 +21,6 @@ public class Bumper
 		Bumper robot = new Bumper();
 		robot.pilot = new TachoPilot(12.8f, 15.5f, Motor.B, Motor.C);
 		robot.pilot.setSpeed(1000);
-		//robot.pilot.setRobotSpeed(30);
 		robot.touch = new TouchSensor(SensorPort.S1);
 		
 		Motor.B.smoothAcceleration(true);
@@ -41,7 +40,7 @@ public class Bumper
 		Motor.A.rotate(armRealign, true);
 		
 		pilot.travelArc(45f,110f);
-		pilot.travel(46);
+		pilot.travel(43);
 		pilot.rotate(110);
 		pilot.forward();
 		Thread.sleep(4000);

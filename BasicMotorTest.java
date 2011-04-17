@@ -4,8 +4,8 @@ import lejos.robotics.navigation.TachoPilot;
 
 
 /**
- *Motor runs forward then backward as button is pressed.
- * @author Roger
+ * Program for basic forward motor testing
+ * @author CzlowiekImadlo
  */
 public class BasicMotorTest
 {

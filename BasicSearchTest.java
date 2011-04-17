@@ -4,7 +4,7 @@ import lejos.nxt.*; // this is required for all programs that run on the NXT
 
 /**
  * 
- * @author Quak
+ * @author CzlowiekImadlo
  */
 public class BasicSearchTest
 {

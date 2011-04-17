@@ -4,8 +4,7 @@ import lejos.robotics.navigation.TachoPilot;
 
 
 /**
- *Motor runs forward then backward as button is pressed.
- * @author Roger
+ * @author CzlowiekImadlo
  */
 public class Pass
 {
@@ -32,7 +31,7 @@ public class Pass
 		int action = 0;
 		int button = 0;
 		
-		//ask for delay
+		// ask for delay
 		while (button != 1)
 		{
 			LCD.clear();
@@ -49,7 +48,8 @@ public class Pass
 		}
 
 		
-		//ask for action
+		// ask for action
+		// yes, we have 6 different paths :P
 		button = 0;
 		while (button != 1)
 		{
@@ -75,7 +75,7 @@ public class Pass
 		
 		if (action == 0) steerTight(false);
 		else if (action == 1) steerWide(false);
-		else if (action == 2) steerTight(true);
+		else if (action == 2) steerTightLeft(false);
 		else if (action == 3) steerWide(true);
 		else if (action == 4) edge(false);
 		else if (action == 5) edge(true);
@@ -96,11 +96,12 @@ public class Pass
 	}
 	
 	
-	
+	// this thing will crash NXC brick 1 out of 4 times
+	// dunno why
 	public void steerTight(boolean reverse) throws Exception
 	{
 		int rotate = 70;
-		int steer = -55;
+		int steer = -46;
 		
 		if (reverse)
 		{
@@ -114,7 +115,27 @@ public class Pass
 		pilot.stop();
 	}
 	
+	// this thing exists only because robot steers differently
+	// to the left than to the right oO'
+	public void steerTightLeft(boolean reverse) throws Exception
+	{
+		int rotate = -70;
+		int steer = 42;
+		
+		if (reverse)
+		{
+			rotate = -rotate;
+			steer = -steer;
+		}
+		
+		pilot.rotate(rotate);
+		pilot.steer(steer);
+		Thread.sleep(2300);
+		pilot.stop();
+	}
 	
+	// turns out to be optimal path, combining good travel time
+	// with low chance for crashing into something
 	public void steerWide(boolean reverse) throws Exception
 	{
 		
@@ -134,6 +155,9 @@ public class Pass
 		pilot.travel(65);
 	}
 	
+	
+	// this should bypass all obstacles inside field
+	// may cause robot to leave field and lose
 	public void edge(boolean reverse) throws Exception
 	{
 		int rotate = 180;

@@ -5,7 +5,7 @@ import lejos.robotics.navigation.TachoPilot;
 
 /**
  * 
- * @author Quak
+ * @author CzlowiekImadlo
  */
 public class Sensors
 {

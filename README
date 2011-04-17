@@ -6,6 +6,8 @@ Wydział Matematyki i Informatyki
 Name:
 Panzerbesatzung
 
+Team leader:
+Wojciech Chojnacki
 
 
 This repository contains all source files for robot
@@ -16,5 +18,17 @@ General configuration of robot is:
 B,C - main motors for movement
 A - manipulator servo
 
+
+Due to calibration problems with PanzerBot 1.0 we had
+to drop this design. Completely new robot, now with wheels
+instead of caterpillars, will take part in competition.
+New setup, with large wheels and different cogs for higher
+speed, while significantly lacking in pushing power, turns
+out to be better in running over obstacles.
+
+As for contest programms, those are extremely simple, with
+no sensors used at all.
+
 Some of programs in repo are for testing purposes only
 and may often change due to sensor ports reconfiguration
+or something.
